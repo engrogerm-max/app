@@ -76,5 +76,35 @@ create policy "public all" on m1br_site for all using (true) with check (true);`
   // Roda ao abrir a página
   window.addEventListener('DOMContentLoaded', carregarDadosDoSite);
 </script>
+  <script>
+  // Como o script já está lá em cima, o "supabase" já está disponível
+  const supabaseUrl = 'https://xwudkrpfbgvoymykyscv.supabase.co';
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3dWRrcnBmYmd2b3lteWt5c2N2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY1NTMzMTYsImV4cCI6MjEwMjEyOTMxNn0.-mYSUSNe7nD7f6oJNHW-FT59Vy6P1ZErQ6xTqP_smjQ';
+  const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+  async function salvarAlteracoesAdmin() {
+    const dadosParaSalvar = {
+      // Exemplo: se você tem um input com id="texto-laudo"
+      textoLaudo: document.getElementById('texto-laudo')?.value || "Conteúdo Padrão"
+    };
+
+    const { error } = await _supabase
+      .from('site_content')
+      .upsert({ key: 'configuracao_geral', data: dadosParaSalvar }, { onConflict: 'key' });
+
+    if (error) { alert("Erro ao salvar: " + error.message); } 
+    else { alert("Salvo com sucesso!"); }
+  }
+
+  async function carregarDadosDoSite() {
+    const { data } = await _supabase.from('site_content').select('data').eq('key', 'configuracao_geral').single();
+    if (data && data.data) {
+       // Aqui você colocaria o código para atualizar os campos do seu site
+       console.log("Dados carregados:", data.data);
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', carregarDadosDoSite);
+</script>
 </body>
 </html>
