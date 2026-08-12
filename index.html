@@ -106,5 +106,37 @@ create policy "public all" on m1br_site for all using (true) with check (true);`
 
   window.addEventListener('DOMContentLoaded', carregarDadosDoSite);
 </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // 1. Substitua abaixo com as suas credenciais reais (URL e Anon Key)
+  const supabaseUrl = 'https://xwudkrpfbgvoymykyscv.supabase.co';
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3dWRrcnBmYmd2b3lteWt5c2N2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY1NTMzMTYsImV4cCI6MjEwMjEyOTMxNn0.-mYSUSNe7nD7f6oJNHW-FT59Vy6P1ZErQ6xTqP_smjQ';
+
+  const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+  // 2. Função que busca os dados da tabela m1br_site e atualiza a tela
+  async function carregarDadosDoSite() {
+    const { data, error } = await supabase
+      .from('m1br_site')
+      .select('*')
+      .eq('id', 1)
+      .single();
+
+    if (error) {
+      console.error("Erro ao buscar dados:", error);
+      return;
+    }
+
+    if (data) {
+      // 3. Aqui você precisa dizer ao código onde colocar os dados
+      // Exemplo: se tiver uma div com id="meu_anuncio", fazemos isso:
+      // document.getElementById('meu_anuncio').innerHTML = data.anuncios;
+      console.log("Dados carregados com sucesso:", data);
+    }
+  }
+
+  // Executa a busca ao carregar a página
+  carregarDadosDoSite();
+</script>
 </body>
 </html>
