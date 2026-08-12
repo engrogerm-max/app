@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>React Artifact</title>
@@ -31,6 +32,49 @@ alter table m1br_site enable row level security;
 create policy "public all" on m1br_site for all using (true) with check (true);`}),p("button",{onClick:()=>{navigator.clipboard.writeText(`create table m1br_site (id int primary key, abas jsonb, ads jsonb, botoes jsonb, updated_at timestamp default now()); insert into m1br_site (id, abas, ads, botoes) values (1, '{}', '[]', '[]'); alter table m1br_site enable row level security; create policy "public all" on m1br_site for all using (true) with check (true);`),se("SQL copiado!")},className:"mt-2 w-full h-7 rounded-full bg-white text-[#0E2A5E] text-[10px] font-bold",children:"Copiar SQL"})]}),S("div",{className:"bg-[#EEF2FF] border border-[#C7D2FE] rounded-[12px] p-3",children:[p("h4",{className:"text-[10px] font-extrabold text-[#0E2A5E]",children:"Pronto para Vercel"}),p("p",{className:"text-[10px] text-[#475569] mt-1",children:"Este arquivo único já contém: script supabase CDN no head, picsum 8 imagens garantidas, lógica nuvem automática. Basta arrastar o HTML exportado para Vercel. Quando salvar no ADMIN → NUVEM, todos veem na hora."})]})]})]})]})]})}),R&&p("div",{className:"fixed bottom-4 left-1/2 -translate-x-1/2 z-[70] bg-[#0A2448] text-white text-[12px] font-semibold px-4 py-2.5 rounded-full shadow-lg max-w-[90%] text-center",children:R})]})}jc.createRoot(document.getElementById("root")).render(p(Xc.default.StrictMode,{children:p(ea,{})}));
 </script>
   <script>(function(){function m(a){var h=a.getAttribute("href");if(!h)return;try{var u=new URL(h,document.baseURI);if((u.protocol==="http:"||u.protocol==="https:")&&u.host!==location.host){a.target="_blank";a.rel="noopener noreferrer";}}catch(e){}}function s(){document.querySelectorAll("a[href]").forEach(m);}if(document.readyState!=="loading"){s();}else{document.addEventListener("DOMContentLoaded",s);}document.addEventListener("click",function(e){var a=e.target&&e.target.closest&&e.target.closest("a[href]");if(a){m(a);}},true);})();</script>
-  
+  <script>
+  // 1. Conecta com o Supabase
+  const supabaseUrl = 'SUA_URL_DO_SUPABASE';
+  const supabaseKey = 'SUA_CHAVE_ANON_DO_SUPABASE';
+  const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+  // 2. Função para salvar quando você clicar no botão da sua área administrativa
+  async function salvarAlteracoesAdmin() {
+    // Exemplo: pegando dados da tela (ajuste para os IDs ou classes dos seus inputs)
+    const dadosParaSalvar = {
+      textoExemplo: document.querySelector('input')?.value || "Atualizado"
+    };
+
+    const { error } = await _supabase
+      .from('site_content')
+      .upsert({ 
+        key: 'configuracao_geral', 
+        data: dadosParaSalvar 
+      }, { onConflict: 'key' });
+
+    if (error) {
+      alert("Erro ao salvar: " + error.message);
+    } else {
+      alert("Salvo com sucesso na nuvem para todos!");
+    }
+  }
+
+  // 3. Carrega os dados automaticamente assim que o site abre para qualquer pessoa
+  async function carregarDadosDoSite() {
+    const { data, error } = await _supabase
+      .from('site_content')
+      .select('data')
+      .eq('key', 'configuracao_geral')
+      .single();
+
+    if (data && data.data) {
+      console.log("Dados carregados da nuvem:", data.data);
+      // Aqui você aplica os dados na tela do seu site para o visitante ver
+    }
+  }
+
+  // Roda ao abrir a página
+  window.addEventListener('DOMContentLoaded', carregarDadosDoSite);
+</script>
 </body>
 </html>
