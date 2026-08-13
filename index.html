@@ -5,10 +5,12 @@
   <meta name="google" content="notranslate">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>M1 Brasil - Engenharia</title>
+  <!-- Carregando Supabase via CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f3f4f6; color: #333; }
     .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    pre { white-space: pre-wrap; word-wrap: break-word; background: #eee; padding: 10px; border-radius: 4px; }
   </style>
 </head>
 <body translate="no">
@@ -19,9 +21,11 @@
   </div>
 
   <script>
+    // Configurações do seu banco de dados
     const supabaseUrl = 'https://xwudkrpfbgvoymykyscv.supabase.co';
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3dWRrcnBmYmd2b3lteWt5c2N2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY1NTMzMTYsImV4cCI6MjEwMjEyOTMxNn0.-mYSUSNe7nD7f6oJNHW-FT59Vy6P1ZErQ6xTqP_smjQ';
     
+    // Inicialização segura
     const _supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
     async function carregarDadosDoSite() {
@@ -37,17 +41,18 @@
         if (data) {
           document.getElementById('status_nuvem').style.display = 'none';
           
-          if (data.data) {
-            document.getElementById('conteudo_site').innerHTML = `<pre>${JSON.stringify(data.data, null, 2)}</pre>`;
-          }
+          // Exibe o JSON dos dados carregados na div de conteúdo
+          document.getElementById('conteudo_site').innerHTML = 
+            '<h3>Dados carregados:</h3><pre>' + JSON.stringify(data, null, 2) + '</pre>';
         }
       } catch (err) {
         document.getElementById('status_nuvem').innerText = "Erro ao conectar com a nuvem.";
-        console.error("Erro:", err);
+        console.error("Erro Supabase:", err);
       }
     }
 
-    carregarDadosDoSite();
+    // Executa ao carregar a página
+    document.addEventListener('DOMContentLoaded', carregarDadosDoSite);
   </script>
 </body>
 </html>
