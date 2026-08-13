@@ -1,54 +1,131 @@
 <!DOCTYPE html>
 <html lang="pt-BR" translate="no">
 <head>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <meta charset="UTF-8">
   <meta name="google" content="notranslate">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>M1 Brasil - Engenharia</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f3f4f6; color: #333; }
-    .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-  </style>
+  <style>*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}html{line-height:1.5;-webkit-text-size-adjust:100%;tab-size:4;font-family:system-ui,sans-serif}body{margin:0;line-height:inherit;background:#F3F4F6;color:#374151}#root{min-height:100vh}</style>
 </head>
 <body translate="no">
-  <div class="container">
-    <h1>M1 Brasil Engenharia</h1>
-    <p id="status_nuvem">Carregando dados da nuvem...</p>
-    <div id="conteudo_site"></div>
-  </div>
+  <div id="root"></div>
+  
+  <script type="module">
+    import React, { useState, useEffect, useRef, useMemo } from 'https://esm.sh/react@18.3.1';
+    import { createRoot } from 'https://esm.sh/react-dom@18.3.1/client';
+    import * as LucideIcons from 'https://esm.sh/lucide-react@0.344.0';
 
-  <script>
-    const supabaseUrl = 'https://xwudkrpfbgvoymykyscv.supabase.co';
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3dWRrcnBmYmd2b3lteWt5c2N2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY1NTMzMTYsImV4cCI6MjEwMjEyOTMxNn0.-mYSUSNe7nD7f6oJNHW-FT59Vy6P1ZErQ6xTqP_smjQ';
-    
-    const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+    const defaultAbas = {
+      "LAUDOS": [
+        { id: "l1", titulo: "Laudo de Homologação / Transformação", descricao: "Laudo para alteração de características, transformação de furgão, carroceria e homologação junto ao DETRAN.", documentos: ["CRLV", "Fotos 4 ângulos + chassi", "Nota da transformação", "CNH do proprietário"], whatsappMsg: "Olá! Quero orçamento para Laudo de Homologação / Transformação veicular.", formLink: "https://forms.gle/m1br-laudos-homo" },
+        { id: "l2", titulo: "CSV - Certificado de Segurança Veicular", descricao: "Vistoria e emissão de CSV para GNV, recuperação de sinistro, blindagem e demais exigências INMETRO.", documentos: ["CRLV", "Fotos detalhadas", "Notas fiscais dos serviços", "ART quando necessário"], whatsappMsg: "Olá! Preciso de CSV - Certificado de Segurança Veicular.", formLink: "https://forms.gle/m1br-csv" },
+        { id: "l3", titulo: "Capacidade Técnica e Peso", descricao: "Laudo de capacidade técnica, PBT, CMT e distribuição de peso.", documentos: ["CRLV e dados da balança", "Fotos da plaqueta", "Memorial"], whatsappMsg: "Olá! Preciso de Laudo de Capacidade Técnica.", formLink: "https://forms.gle/m1br-capacidade" }
+      ],
+      "ART": [
+        { id: "a1", titulo: "ART de Fabricação de Carroceria", descricao: "ART para fabricação de carrocerias, baú, grade baixa e implementos.", documentos: ["Projeto básico", "Fotos da fabricação", "CNPJ do fabricante"], whatsappMsg: "Olá! Preciso de ART de Fabricação.", formLink: "https://forms.gle/m1br-art-fab" }
+      ],
+      "PROJETOS": [
+        { id: "p1", titulo: "Projeto de Carroceria Baú / Sider", descricao: "Projeto completo dimensionado conforme resolução CONTRAN e INMETRO.", documentos: ["Medidas desejadas", "Tipo de carga", "Fotos chassi limpo"], whatsappMsg: "Olá! Quero projeto de Baú / Sider.", formLink: "https://forms.gle/m1br-proj-bau" }
+      ],
+      "OUTROS": [
+        { id: "o1", titulo: "Inspeção Veicular Prévia", descricao: "Checklist técnico pré-vistoria INMETRO para evitar reprova.", documentos: ["CRLV", "Fotos gerais", "Vídeo curto"], whatsappMsg: "Olá! Quero inspeção prévia.", formLink: "https://forms.gle/m1br-outros-previa" }
+      ],
+      "SERVIÇOS": [
+        { id: "s1", titulo: "Homologação Completa DETRAN", descricao: "Cuidamos de todo processo: laudo, ART, agendamento.", documentos: ["Documento do veículo", "Comprovante endereço", "CNH"], whatsappMsg: "Olá! Quero serviço completo de homologação.", formLink: "https://forms.gle/m1br-serv-homo" }
+      ],
+      "MANUAIS": [
+        { id: "m1", titulo: "Manual Tanque Suplementar", descricao: "Passo a passo para instalação correta e aprovação sem reprova.", documentos: ["Guia PDF", "Checklist fotos", "Modelo ART"], whatsappMsg: "Olá! Quero manual do tanque suplementar.", formLink: "https://forms.gle/m1br-manual-tanque" }
+      ]
+    };
 
-    async function carregarDadosDoSite() {
-      try {
-        const { data, error } = await _supabase
-          .from('m1br_site')
-          .select('*')
-          .eq('id', 1)
-          .single();
+    const defaultAds = [
+      { id: "1", src: "https://picsum.photos/seed/m1br1/200/200", title: "M1 Engenharia", link: "https://www.m1br.com.br" },
+      { id: "2", src: "https://picsum.photos/seed/m1br2/200/200", title: "Laudos", link: "https://www.m1br.com.br" }
+    ];
 
-        if (error) throw error;
+    const defaultBotoesPequenos = [
+      { id: "b1", nome: "SITE", tipo: "link", valor: "https://www.m1br.com.br" },
+      { id: "b2", nome: "WHATSAPP", tipo: "whatsapp", valor: "Olá M1 Brasil! Vim pelo app." },
+      { id: "b3", nome: "SERVIÇOS", tipo: "modal", valor: "SERVIÇOS" },
+      { id: "b4", nome: "MANUAIS", tipo: "modal", valor: "MANUAIS" }
+    ];
 
-        if (data) {
-          document.getElementById('status_nuvem').style.display = 'none';
-          
-          // Exemplo de como você pode injetar o conteúdo que vem do painel
-          if (data.data) {
-            document.getElementById('conteudo_site').innerHTML = `<pre>${JSON.stringify(data.data, null, 2)}</pre>`;
-          }
+    const defaultBotoesGrandes = [
+      { id: "LAUDOS", nome: "LAUDOS" },
+      { id: "ART", nome: "ART" },
+      { id: "PROJETOS", nome: "PROJETOS" },
+      { id: "OUTROS", nome: "OUTROS" }
+    ];
+
+    function App() {
+      const [abas, setAbas] = useState(defaultAbas);
+      const [ads, setAds] = useState(defaultAds);
+      const [botoesPeq, setBotoesPeq] = useState(defaultBotoesPequenos);
+      const [botoesGran, setBotoesGran] = useState(defaultBotoesGrandes);
+      
+      const [activeModal, setActiveModal] = useState(null);
+      const [adminOpen, setAdminOpen] = useState(false);
+      const [senha, setSenha] = useState("");
+      const [logado, setLogado] = useState(false);
+      const [adminTab, setAdminTab] = useState("ABAS");
+      const [adminAbaSel, setAdminAbaSel] = useState("LAUDOS");
+      const [toast, setToast] = useState(null);
+
+      const clickCount = useRef(0);
+      const clickTimer = useRef(null);
+
+      const showToast = (msg) => {
+        setToast(msg);
+        setTimeout(() => setToast(null), 3500);
+      };
+
+      const handleLogoClick = () => {
+        clickCount.current += 1;
+        if (clickTimer.current) clearTimeout(clickTimer.current);
+        clickTimer.current = setTimeout(() => { clickCount.current = 0; }, 2000);
+        if (clickCount.current >= 3) {
+          clickCount.current = 0;
+          setAdminOpen(true);
+          setLogado(false);
+          setSenha("");
         }
-      } catch (err) {
-        document.getElementById('status_nuvem').innerText = "Erro ao conectar com a nuvem.";
-        console.error("Erro:", err);
-      }
+      };
+
+      const handleBtnClick = (nome) => {
+        if (nome === "SITE") { window.open("https://www.m1br.com.br", "_blank"); return; }
+        if (nome === "WHATSAPP") { window.open("https://wa.me/5511962122694?text=Olá%20M1%20Brasil!%20Vim%20pelo%20app.", "_blank"); return; }
+        const found = botoesPeq.find(b => b.nome === nome);
+        if (found) {
+          if (found.tipo === "link") { window.open(found.valor, "_blank"); return; }
+          if (found.tipo === "whatsapp") { window.open(`https://wa.me/5511962122694?text=${encodeURIComponent(found.valor)}`, "_blank"); return; }
+          setActiveModal(found.valor);
+          return;
+        }
+        setActiveModal(nome);
+      };
+
+      return React.createElement('div', { className: 'min-h-screen bg-[#F3F4F6] flex justify-center' }, [
+        React.createElement('div', { className: 'w-full max-w-[380px] bg-[#F7F7F8] min-h-screen px-4 py-6 flex flex-col items-center relative' }, [
+          React.createElement('div', { className: 'flex flex-col items-center w-full select-none' }, [
+            React.createElement('div', { onClick: handleLogoClick, className: 'cursor-pointer' }, [
+              React.createElement('h1', { className: 'mt-2 font-extrabold text-center text-[28px] text-[#0E2A5E]' }, 'M1 BRASIL')
+            ]),
+            React.createElement('p', { className: 'text-center text-[16px] text-[#6B7280] font-bold' }, 'Engenharia')
+          ]),
+          React.createElement('div', { className: 'grid grid-cols-2 gap-3 w-full mt-6' }, 
+            botoesGran.map(b => React.createElement('button', {
+              key: b.id,
+              onClick: () => setActiveModal(b.id),
+              className: 'bg-[#0E2A5E] hover:bg-[#FF6A00] text-white rounded-xl h-[100px] font-bold text-sm'
+            }, b.nome))
+          ),
+          toast && React.createElement('div', { className: 'fixed bottom-4 bg-slate-900 text-white text-xs px-4 py-2 rounded-full shadow-lg' }, toast)
+        ])
+      ]);
     }
 
-    carregarDadosDoSite();
+    createRoot(document.getElementById('root')).render(React.createElement(App));
   </script>
 </body>
 </html>
