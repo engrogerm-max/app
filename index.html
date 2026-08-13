@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR" translate="no">
-<head><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-  <head>
+<head>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta charset="UTF-8">
-  ... (o resto do seu código)
   <meta charset="UTF-8">
   <meta name="google" content="notranslate">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,6 +12,7 @@
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f3f4f6; color: #333; }
     .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    pre { white-space: pre-wrap; word-wrap: break-word; background: #eee; padding: 10px; border-radius: 4px; }
   </style>
 </head>
 <body translate="no">
@@ -47,6 +43,8 @@
           
           if (data.data) {
             document.getElementById('conteudo_site').innerHTML = '<pre>' + JSON.stringify(data.data, null, 2) + '</pre>';
+          } else {
+            document.getElementById('conteudo_site').innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
           }
         }
       } catch (err) {
