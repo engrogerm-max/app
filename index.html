@@ -1,414 +1,53 @@
 <!DOCTYPE html>
 <html lang="pt-BR" translate="no">
 <head>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <meta charset="UTF-8">
   <meta name="google" content="notranslate">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>M1 Brasil - Engenharia</title>
-  <style>*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;box-sizing:border-box;border:0 solid #e5e7eb}::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1}html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif}body{line-height:inherit;margin:0}hr{height:0;color:inherit;border-top-width:1px}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;font-weight:inherit;line-height:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}img,video{max-width:100%;height:auto}.container{width:100%}@media (min-width:640px){.container{max-width:640px}}@media (min-width:768px){.container{max-width:768px}}@media (min-width:1024px){.container{max-width:1024px}}@media (min-width:1280px){.container{max-width:1280px}}@media (min-width:1536px){.container{max-width:1536px}}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0}.-top-1{top:-.25rem}.bottom-4{bottom:1rem}.left-1\/2{left:50%}.right-0{right:0}.right-2{right:.5rem}.top-1\/2{top:50%}.z-50{z-index:50}.z-\[60\]{z-index:60}.z-\[70\]{z-index:70}.mb-2{margin-bottom:.5rem}.mt-1{margin-top:.25rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-6{margin-top:1.5rem}.mt-\[2px\]{margin-top:2px}.inline-block{display:inline-block}.inline{display:inline}.flex{display:flex}.table{display:table}.grid{display:grid}.hidden{display:none}.h-1\.5{height:.375rem}.h-10{height:2.5rem}.h-2{height:.5rem}.h-3{height:.75rem}.h-3\.5{height:.875rem}.h-4{height:1rem}.h-5{height:1.25rem}.h-6{height:1.5rem}.h-7{height:1.75rem}.h-8{height:2rem}.h-9{height:2.25rem}.h-\[100dvh\]{height:100dvh}.h-\[108px\]{height:108px}.h-\[140px\]{height:140px}.h-\[56px\]{height:56px}.h-\[64px\]{height:64px}.h-\[68px\]{height:68px}.h-\[6px\]{height:6px}.h-full{height:100%}.min-h-\[100px\]{min-height:100px}.min-h-\[60px\]{min-height:60px}.min-h-\[70px\]{min-height:70px}.min-h-screen{min-height:100vh}.w-10{width:2.5rem}.w-20{width:5rem}.w-3{width:.75rem}.w-3\.5{width:.875rem}.w-4{width:1rem}.w-5{width:1.25rem}.w-6{width:1.5rem}.w-7{width:1.75rem}.w-8{width:2rem}.w-\[12px\]{width:12px}.w-\[64px\]{width:64px}.w-\[68px\]{width:68px}.w-\[6px\]{width:6px}.w-auto{width:auto}.w-full{width:100%}.max-w-\[260px\]{max-width:260px}.max-w-\[380px\]{max-width:380px}.max-w-\[420px\]{max-width:420px}.max-w-\[90\%\]{max-width:90%}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.-translate-x-1\/2{--tw-translate-x:-50%}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.-translate-y-1\/2{--tw-translate-y:-50%}.cursor-pointer{cursor:pointer}.select-none{-webkit-user-select:none;user-select:none}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:.25rem}.gap-1\.5{gap:.375rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.overflow-y-auto{overflow-y:auto}.whitespace-pre-wrap{white-space:pre-wrap}.rounded{border-radius:.25rem}.rounded-\[10px\]{border-radius:10px}.rounded-\[12px\]{border-radius:12px}.rounded-\[14px\]{border-radius:14px}.rounded-\[6px\]{border-radius:6px}.rounded-\[8px\]{border-radius:8px}.rounded-full{border-radius:9999px}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-dashed{border-style:dashed}.border-\[\#C7D2FE\]{border-color:#c7d2fe}.border-\[\#E2E8F0\]{border-color:#e2e8f0}.border-green-200{border-color:#bbf7d0}.bg-\[\#0A2448\]{background-color:#0a2448}.bg-\[\#0E2A5E\]{background-color:#0e2a5e}.bg-\[\#16A34A\]{background-color:#16a34a}.bg-\[\#25D366\]{background-color:#25d366}.bg-\[\#CBD5E1\]{background-color:#cbd5e1}.bg-\[\#E2E8F0\]{background-color:#e2e8f0}.bg-\[\#EEF2FF\]{background-color:#eef2ff}.bg-\[\#F1F5F9\]{background-color:#f1f5f9}.bg-\[\#F3F4F6\]{background-color:#f3f4f6}.bg-\[\#F7F7F8\]{background-color:#f7f7f8}.bg-black\/30{background-color:rgba(0,0,0,.3)}.bg-black\/60{background-color:rgba(0,0,0,.6)}.bg-black\/70{background-color:rgba(0,0,0,.7)}.bg-green-50{background-color:#f0fdf4}.bg-red-50{background-color:#fef2f2}.bg-white{background-color:#fff}.bg-white\/10{background-color:hsla(0,0%,100%,.1)}.object-cover{object-fit:cover}.p-2{padding:.5rem}.p-3{padding:.75rem}.p-6{padding:1.5rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-0\.5{padding-top:.125rem;padding-bottom:.125rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-12{padding-top:3rem;padding-bottom:3rem}.py-2\.5{padding-top:.625rem;padding-bottom:.625rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.pb-4{padding-bottom:1rem}.pr-10{padding-right:2.5rem}.text-center{text-align:center}.font-mono{font-family:monospace}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[12px\]{font-size:12px}.text-\[13px\]{font-size:13px}.text-\[14px\]{font-size:14px}.text-\[18px\]{font-size:18px}.text-\[9px\]{font-size:9px}.text-sm{font-size:.875rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-\[12px\]{line-height:12px}.leading-\[13px\]{line-height:13px}.leading-\[14px\]{line-height:14px}.leading-none{line-height:1}.tracking-\[1px\]{letter-spacing:1px}.tracking-wide{letter-spacing:.025em}.text-\[\#0A2448\]{color:#0a2448}.text-\[\#0E2A5E\]{color:#0e2a5e}.text-\[\#374151\]{color:#374151}.text-\[\#475569\]{color:#475569}.text-\[\#6B7280\]{color:#6b7280}.text-\[\#9CA3AF\]{color:#9ca3af}.text-gray-500{color:#6b7280}.text-green-300{color:#86efac}.text-green-600{color:#16a34a}.text-green-700{color:#15803d}.text-red-600{color:#dc2626}.text-white{color:#fff}.shadow-2xl{box-shadow:0 25px 50px -12px rgba(0,0,0,.25)}.shadow-inner{box-shadow:inset 0 2px 4px 0 rgba(0,0,0,.05)}.shadow-lg{box-shadow:0 10px 15px -3px rgba(0,0,0,.1)}.shadow-sm{box-shadow:0 1px 2px 0 rgba(0,0,0,.05)}.backdrop-blur-sm{backdrop-filter:blur(4px)}.transition-all{transition-property:all;transition-duration:.15s}.transition-colors{transition-property:color,background-color,border-color}.transition-transform{transition-property:transform}.duration-200{transition-duration:.2s}#root,body,html{min-height:100%}body{margin:0;font-family:Inter,sans-serif}.hover\:bg-\[\#E2E8F0\]:hover{background-color:#e2e8f0}.hover\:bg-\[\#FF6A00\]:hover{background-color:#ff6a00}.active\:scale-95:active{transform:scale(.95)}</style>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f3f4f6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+  </style>
 </head>
 <body translate="no">
-  <div id="root"></div>
-  
-  <script type="module">
-    import React, { useState, useEffect, useRef, useMemo } from 'https://esm.sh/react@18.3.1';
-    import { createRoot } from 'https://esm.sh/react-dom@18.3.1/client';
-    import * as LucideIcons from 'https://esm.sh/lucide-react@0.344.0';
+  <div class="container">
+    <h1>M1 Brasil Engenharia</h1>
+    <p id="status_nuvem">Carregando dados da nuvem...</p>
+    <div id="conteudo_site"></div>
+  </div>
 
-    const defaultAbas = {
-      "LAUDOS": [
-        { id: "l1", titulo: "Laudo de Homologação / Transformação", descricao: "Laudo para alteração de características, transformação de furgão, carroceria e homologação junto ao DETRAN.", documentos: ["CRLV", "Fotos 4 ângulos + chassi", "Nota da transformação", "CNH do proprietário"], whatsappMsg: "Olá! Quero orçamento para Laudo de Homologação / Transformação veicular.", formLink: "https://forms.gle/m1br-laudos-homo" },
-        { id: "l2", titulo: "CSV - Certificado de Segurança Veicular", descricao: "Vistoria e emissão de CSV para GNV, recuperação de sinistro, blindagem e demais exigências INMETRO.", documentos: ["CRLV", "Fotos detalhadas", "Notas fiscais dos serviços", "ART quando necessário"], whatsappMsg: "Olá! Preciso de CSV - Certificado de Segurança Veicular.", formLink: "https://forms.gle/m1br-csv" },
-        { id: "l3", titulo: "Capacidade Técnica e Peso", descricao: "Laudo de capacidade técnica, PBT, CMT e distribuição de peso.", documentos: ["CRLV e dados da balança", "Fotos da plaqueta", "Memorial"], whatsappMsg: "Olá! Preciso de Laudo de Capacidade Técnica.", formLink: "https://forms.gle/m1br-capacidade" },
-        { id: "l4", titulo: "Tanque Suplementar até 1500L", descricao: "Regularização de tanque suplementar diesel até 1500L com ART e projeto.", documentos: ["CRLV", "Foto do tanque instalado", "Nota fiscal do tanque"], whatsappMsg: "Olá! Quero regularizar Tanque Suplementar 1500L.", formLink: "https://forms.gle/m1br-tanque" },
-        { id: "l5", titulo: "Guincho / Plataforma / Munck", descricao: "Laudos para guincho, plataforma auto-socorro, cesto aéreo e munck.", documentos: ["CRLV", "Fotos equipamento", "Notas e manuais"], whatsappMsg: "Olá! Preciso de laudo para Guincho / Munck.", formLink: "https://forms.gle/m1br-guincho" }
-      ],
-      "ART": [
-        { id: "a1", titulo: "ART de Fabricação de Carroceria", descricao: "ART para fabricação de carrocerias, baú, grade baixa e implementos.", documentos: ["Projeto básico", "Fotos da fabricação", "CNPJ do fabricante"], whatsappMsg: "Olá! Preciso de ART de Fabricação.", formLink: "https://forms.gle/m1br-art-fab" },
-        { id: "a2", titulo: "ART de Montagem / Instalação", descricao: "ART para montagem de 3º eixo, tanque, plataforma.", documentos: ["CRLV", "Fotos antes/depois", "Nota do serviço"], whatsappMsg: "Olá! Preciso de ART de Montagem.", formLink: "https://forms.gle/m1br-art-mont" }
-      ],
-      "PROJETOS": [
-        { id: "p1", titulo: "Projeto de Carroceria Baú / Sider", descricao: "Projeto completo dimensionado conforme resolução CONTRAN e INMETRO.", documentos: ["Medidas desejadas", "Tipo de carga", "Fotos chassi limpo"], whatsappMsg: "Olá! Quero projeto de Baú / Sider.", formLink: "https://forms.gle/m1br-proj-bau" },
-        { id: "p2", titulo: "Projeto 3º Eixo / Truck", descricao: "Projeto de inclusão de eixo adicional com cálculos de entre-eixos e PBT.", documentos: ["CRLV", "Distância entre eixos", "Tipo de suspensão"], whatsappMsg: "Olá! Quero projeto de 3º eixo.", formLink: "https://forms.gle/m1br-proj-truck" }
-      ],
-      "OUTROS": [
-        { id: "o1", titulo: "Inspeção Veicular Prévia", descricao: "Checklist técnico pré-vistoria INMETRO para evitar reprova.", documentos: ["CRLV", "Fotos gerais", "Vídeo curto"], whatsappMsg: "Olá! Quero inspeção prévia.", formLink: "https://forms.gle/m1br-outros-previa" }
-      ],
-      "SERVIÇOS": [
-        { id: "s1", titulo: "Homologação Completa DETRAN", descricao: "Cuidamos de todo processo: laudo, ART, agendamento.", documentos: ["Documento do veículo", "Comprovante endereço", "CNH"], whatsappMsg: "Olá! Quero serviço completo de homologação.", formLink: "https://forms.gle/m1br-serv-homo" },
-        { id: "s2", titulo: "Consultoria Técnica", descricao: "Consultoria para fabricantes, frotas e oficinas sobre resoluções CONTRAN.", documentos: ["Descrição da demanda", "Fotos / projetos"], whatsappMsg: "Olá! Preciso de consultoria técnica.", formLink: "https://forms.gle/m1br-consultoria" }
-      ],
-      "MANUAIS": [
-        { id: "m1", titulo: "Manual Tanque Suplementar", descricao: "Passo a passo para instalação correta e aprovação sem reprova.", documentos: ["Guia PDF", "Checklist fotos", "Modelo ART"], whatsappMsg: "Olá! Quero manual do tanque suplementar.", formLink: "https://forms.gle/m1br-manual-tanque" },
-        { id: "m2", titulo: "Manual Transformação Furgão", descricao: "O que pode e o que não pode na transformação de furgão.", documentos: ["Resoluções", "Exemplos aprovados", "Fotos padrão"], whatsappMsg: "Olá! Quero manual de transformação.", formLink: "https://forms.gle/m1br-manual-furgao" }
-      ]
-    };
+  <script>
+    const supabaseUrl = 'https://xwudkrpfbgvoymykyscv.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3dWRrcnBmYmd2b3lteWt5c2N2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY1NTMzMTYsImV4cCI6MjEwMjEyOTMxNn0.-mYSUSNe7nD7f6oJNHW-FT59Vy6P1ZErQ6xTqP_smjQ';
+    
+    const _supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-    const defaultAds = [
-      { id: "1", src: "https://picsum.photos/seed/m1br1/200/200", title: "M1 Engenharia", link: "https://www.m1br.com.br" },
-      { id: "2", src: "https://picsum.photos/seed/m1br2/200/200", title: "Laudos", link: "https://www.m1br.com.br" },
-      { id: "3", src: "https://picsum.photos/seed/m1br3/200/200", title: "ART", link: "https://www.m1br.com.br" },
-      { id: "4", src: "https://picsum.photos/seed/m1br4/200/200", title: "Projetos", link: "https://www.m1br.com.br" }
-    ];
+    async function carregarDadosDoSite() {
+      try {
+        const { data, error } = await _supabase
+          .from('m1br_site')
+          .select('*')
+          .eq('id', 1)
+          .single();
 
-    const defaultBotoesPequenos = [
-      { id: "b1", nome: "SITE", tipo: "link", valor: "https://www.m1br.com.br" },
-      { id: "b2", nome: "WHATSAPP", tipo: "whatsapp", valor: "Olá M1 Brasil! Vim pelo app." },
-      { id: "b3", nome: "SERVIÇOS", tipo: "modal", valor: "SERVIÇOS" },
-      { id: "b4", nome: "MANUAIS", tipo: "modal", valor: "MANUAIS" }
-    ];
+        if (error) throw error;
 
-    const defaultBotoesGrandes = [
-      { id: "LAUDOS", nome: "LAUDOS" },
-      { id: "ART", nome: "ART" },
-      { id: "PROJETOS", nome: "PROJETOS" },
-      { id: "OUTROS", nome: "OUTROS" }
-    ];
-
-    function App() {
-      const [abas, setAbas] = useState(defaultAbas);
-      const [ads, setAds] = useState(defaultAds);
-      const [botoesPeq, setBotoesPeq] = useState(defaultBotoesPequenos);
-      const [botoesGran, setBotoesGran] = useState(defaultBotoesGrandes);
-      
-      const [activeModal, setActiveModal] = useState(null);
-      const [adminOpen, setAdminOpen] = useState(false);
-      const [senha, setSenha] = useState("");
-      const [logado, setLogado] = useState(false);
-      const [showPassword, setShowPassword] = useState(false);
-      const [adminTab, setAdminTab] = useState("ABAS");
-      const [adminAbaSel, setAdminAbaSel] = useState("LAUDOS");
-      const [toast, setToast] = useState(null);
-      
-      const supabaseConfig = {
-        url: "https://xwudkrpfbgvoymykyscv.supabase.co",
-        key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3dWRrcnBmYmd2b3lteWt5c2N2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY1NTMzMTYsImV4cCI6MjEwMjEyOTMxNn0.-mYSUSNe7nD7f6oJNHW-FT59Vy6P1ZErQ6xTqP_smjQ"
-      };
-
-      const clickCount = useRef(0);
-      const clickTimer = useRef(null);
-
-      const showToast = (msg) => {
-        setToast(msg);
-        setTimeout(() => setToast(null), 3500);
-      };
-
-      const supabaseClient = useMemo(() => {
-        try {
-          if (!window.supabase || !supabaseConfig.url || !supabaseConfig.key) return null;
-          return window.supabase.createClient(supabaseConfig.url, supabaseConfig.key);
-        } catch { return null; }
-      }, []);
-
-      useEffect(() => {
-        if (!supabaseClient) return;
-        (async () => {
-          try {
-            const { data, error } = await supabaseClient.from('m1br_site').select('*').eq('id', 1).single();
-            if (error) throw error;
-            if (data) {
-              if (data.abas && Object.keys(data.abas).length > 0) setAbas(data.abas);
-              if (data.ads && Array.isArray(data.ads) && data.ads.length > 0) setAds(data.ads);
-              if (data.botoes) {
-                if (data.botoes.pequenos) setBotoesPeq(data.botoes.pequenos);
-                if (data.botoes.grandes) setBotoesGran(data.botoes.grandes);
-                if (Array.isArray(data.botoes)) setBotoesPeq(data.botoes);
-              }
-            }
-          } catch (err) {
-            console.error("Erro ao carregar da nuvem:", err);
-          }
-        })();
-      }, [supabaseClient]);
-
-      const handleLogoClick = () => {
-        clickCount.current += 1;
-        if (clickTimer.current) clearTimeout(clickTimer.current);
-        clickTimer.current = setTimeout(() => { clickCount.current = 0; }, 2000);
-        if (clickCount.current >= 3) {
-          clickCount.current = 0;
-          setAdminOpen(true);
-          setLogado(false);
-          setSenha("");
-        }
-      };
-
-      const handleBtnClick = (nome) => {
-        if (nome === "SITE") { window.open("https://www.m1br.com.br", "_blank"); return; }
-        if (nome === "WHATSAPP") { window.open("https://wa.me/5511962122694?text=Olá%20M1%20Brasil!%20Vim%20pelo%20app.", "_blank"); return; }
-        const found = botoesPeq.find(b => b.nome === nome);
-        if (found) {
-          if (found.tipo === "link") { window.open(found.valor, "_blank"); return; }
-          if (found.tipo === "whatsapp") { window.open(`https://wa.me/5511962122694?text=${encodeURIComponent(found.valor)}`, "_blank"); return; }
-          setActiveModal(found.valor);
-          return;
-        }
-        setActiveModal(nome);
-      };
-
-      const salvarENpublicar = async () => {
-        if (!supabaseClient) {
-          showToast("❌ Erro: Supabase não conectado.");
-          return;
-        }
-        try {
-          const payload = {
-            id: 1,
-            abas: abas,
-            ads: ads,
-            botoes: { pequenos: botoesPeq, grandes: botoesGran },
-            updated_at: new Date().toISOString()
-          };
-          const { error } = await supabaseClient.from('m1br_site').upsert(payload);
-          if (error) throw error;
-          showToast("✅ Salvo e publicado na nuvem para todos online!");
-        } catch (err) {
-          showToast("❌ Erro ao publicar: " + err.message);
-        }
-      };
-
-      // Carrossel
-      const [currentIndex, setCurrentIndex] = useState(0);
-      const [isHovered, setIsHovered] = useState(false);
-      const totalAds = ads.length || 1;
-      const extendedAds = [...ads, ...ads];
-
-      useEffect(() => {
-        if (isHovered) return;
-        const interval = setInterval(() => {
-          setCurrentIndex(prev => prev + 1);
-        }, 2500);
-        return () => clearInterval(interval);
-      }, [isHovered, totalAds]);
-
-      useEffect(() => {
-        if (currentIndex >= totalAds) {
-          const timer = setTimeout(() => setCurrentIndex(0), 800);
-          return () => clearTimeout(timer);
-        }
-      }, [currentIndex, totalAds]);
-
-      const renderIcon = (id) => {
-        switch (id) {
-          case 'LAUDOS': return React.createElement(LucideIcons.FileText, { className: "w-8 h-8 text-[#0A2448]" });
-          case 'ART': return React.createElement(LucideIcons.HardHat, { className: "w-8 h-8 text-[#0A2448]" });
-          case 'PROJETOS': return React.createElement(LucideIcons.Ruler, { className: "w-8 h-8 text-[#0A2448]" });
-          default: return React.createElement(LucideIcons.ClipboardList, { className: "w-8 h-8 text-[#0A2448]" });
-        }
-      };
-
-      return React.createElement('div', { className: 'min-h-screen bg-[#F3F4F6] flex justify-center overflow-x-hidden' }, [
-        React.createElement('div', { className: 'w-full max-w-[380px] bg-[#F7F7F8] min-h-screen px-4 py-6 flex flex-col items-center relative' }, [
+        if (data) {
+          document.getElementById('status_nuvem').style.display = 'none';
           
-          // Header Logo e Nome (sem aviso de nuvem)
-          React.createElement('div', { className: 'flex flex-col items-center w-full select-none' }, [
-            React.createElement('div', { onClick: handleLogoClick, className: 'cursor-pointer active:scale-95 transition-transform' }, [
-              React.createElement('h1', { className: 'mt-2 font-extrabold tracking-[1px] leading-none uppercase text-center', style: { fontFamily: "'Black Ops One', cursive", fontSize: '28px', color: '#0E2A5E' } }, 'M1 BRASIL')
-            ]),
-            React.createElement('p', { onClick: handleLogoClick, className: 'text-center cursor-pointer mt-[2px]', style: { fontFamily: "'Arial Black', Gadget, sans-serif", fontSize: '16px', fontWeight: 900, color: '#6B7280' } }, 'Engenharia')
-          ]),
-
-          // Botões Grandes
-          React.createElement('div', { className: 'grid grid-cols-2 gap-3 w-full mt-6' },
-            botoesGran.map(b => React.createElement('button', {
-              key: b.id,
-              onClick: () => setActiveModal(b.id),
-              className: 'group bg-[#0E2A5E] hover:bg-[#FF6A00] transition-colors duration-200 rounded-[14px] h-[108px] flex flex-col items-center justify-center gap-2 shadow-sm'
-            }, [
-              React.createElement('div', { className: 'w-[68px] h-[68px] rounded-full bg-white flex items-center justify-center shadow-inner' }, renderIcon(b.id)),
-              React.createElement('span', { className: 'text-white font-extrabold text-[11px] tracking-wide' }, b.nome)
-            ]))
-          ),
-
-          // Botões Pequenos
-          React.createElement('div', { className: 'flex flex-wrap justify-center gap-2 w-full mt-4' },
-            botoesPeq.map(b => React.createElement('button', {
-              key: b.id,
-              onClick: () => handleBtnClick(b.nome),
-              className: 'h-7 px-3 rounded-full bg-[#0A2448] hover:bg-[#FF6A00] text-white text-[10px] font-bold tracking-wide transition-colors'
-            }, b.nome))
-          ),
-
-          // Carrossel
-          React.createElement('div', { className: 'w-full mt-6' }, [
-            React.createElement('div', {
-              className: 'bg-white rounded-[14px] border border-[#E2E8F0] p-2 shadow-sm min-h-[100px] overflow-hidden w-full',
-              onMouseEnter: () => setIsHovered(true),
-              onMouseLeave: () => setIsHovered(false)
-            }, [
-              React.createElement('div', { className: 'overflow-hidden w-full' }, [
-                React.createElement('div', {
-                  className: 'flex',
-                  style: { gap: '12px', transform: `translateX(-${currentIndex * 90}px)`, transition: currentIndex > 0 ? 'transform 800ms cubic-bezier(0.4, 0, 0.2, 1)' : 'none' }
-                }, extendedAds.map((ad, idx) => React.createElement('a', {
-                  key: `${ad.id}-${idx}`,
-                  href: ad.link,
-                  target: '_blank',
-                  rel: 'noopener noreferrer',
-                  className: 'shrink-0 rounded-[12px] overflow-hidden border border-[#E2E8F0] bg-white relative flex items-center justify-center',
-                  style: { width: '78px', height: '78px' }
-                }, [
-                  React.createElement('img', { src: ad.src || ad.img, alt: ad.title, className: 'w-full h-full object-cover absolute inset-0' }),
-                  React.createElement('div', { className: 'w-full h-full bg-[#0E2A5E] text-white font-extrabold text-[18px] items-center justify-center hidden absolute inset-0' }, (ad.title || "M").charAt(0))
-                ])))
-              ])
-            ])
-          ]),
-
-          // Rodapé
-          React.createElement('div', { className: 'w-full mt-6 pb-4 relative flex flex-col items-center' }, [
-            React.createElement('p', { className: 'text-[10px] text-[#6B7280] text-center leading-[14px] px-2' }, '© 2026 M1 Brasil Engenharia (11) 96212-2694 | rogerio@m1br.com.br www.m1br.com.br'),
-            React.createElement('button', {
-              onClick: () => { setAdminOpen(true); setLogado(false); setSenha(""); },
-              className: 'absolute right-0 -top-1 p-2 text-[#9CA3AF] hover:text-[#0E2A5E]'
-            }, React.createElement(LucideIcons.Settings, { className: 'w-4 h-4' }))
-          ]),
-
-          // Modal de Seções (Laudos, ART, etc)
-          activeModal && React.createElement('div', { className: 'fixed inset-0 z-50 bg-black/65 backdrop-blur-sm flex justify-center' }, [
-            React.createElement('div', { className: 'w-full max-w-[380px] bg-white h-[100dvh] flex flex-col shadow-2xl' }, [
-              React.createElement('div', { className: 'h-[56px] bg-[#0E2A5E] flex items-center justify-between px-4 shrink-0' }, [
-                React.createElement('h2', { className: 'text-white font-bold text-[14px]' }, activeModal),
-                React.createElement('button', { onClick: () => setActiveModal(null), className: 'w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white' }, React.createElement(LucideIcons.X, { className: 'w-5 h-5' }))
-              ]),
-              React.createElement('div', { className: 'flex-1 overflow-y-auto p-3 space-y-3 bg-[#F7F7F8] scrollbar-thin' },
-                (!abas[activeModal] || abas[activeModal].length === 0)
-                  ? React.createElement('div', { className: 'text-center text-sm text-gray-500 py-12' }, 'Nenhum item cadastrado nesta aba.')
-                  : abas[activeModal].map(item => React.createElement('div', { key: item.id, className: 'bg-white rounded-[12px] border border-[#E2E8F0] p-3 shadow-sm' }, [
-                      React.createElement('h3', { className: 'font-bold text-[13px] text-[#0A2448]' }, item.titulo),
-                      React.createElement('p', { className: 'text-[11px] text-[#6B7280] mt-1' }, item.descricao),
-                      React.createElement('div', { className: 'mt-2 space-y-1' },
-                        item.documentos.map((doc, idx) => React.createElement('div', { key: idx, className: 'flex gap-1.5 text-[11px] text-[#374151]' }, [
-                          React.createElement(LucideIcons.Check, { className: 'w-3.5 h-3.5 text-green-600 shrink-0' }),
-                          React.createElement('span', null, doc)
-                        ]))
-                      ),
-                      React.createElement('div', { className: 'flex gap-2 mt-3' }, [
-                        React.createElement('a', {
-                          href: `https://wa.me/5511962122694?text=${encodeURIComponent(item.whatsappMsg)}`,
-                          target: '_blank',
-                          className: 'flex-1 h-8 rounded-full bg-[#25D366] text-white text-[11px] font-bold flex items-center justify-center'
-                        }, 'WhatsApp'),
-                        React.createElement('a', {
-                          href: item.formLink,
-                          target: '_blank',
-                          className: 'flex-1 h-8 rounded-full bg-[#0E2A5E] text-white text-[11px] font-bold flex items-center justify-center gap-1'
-                        }, ['Formulário ', React.createElement(LucideIcons.ExternalLink, { className: 'w-3 h-3' })])
-                      ])
-                    ]))
-              )
-            ])
-          ]),
-
-          // Painel Administrativo
-          adminOpen && React.createElement('div', { className: 'fixed inset-0 z-[60] bg-black/70 backdrop-blur-sm flex justify-center' }, [
-            React.createElement('div', { className: 'w-full max-w-[420px] bg-white h-[100dvh] flex flex-col' }, [
-              React.createElement('div', { className: 'h-[56px] bg-[#0E2A5E] flex items-center justify-between px-4 shrink-0' }, [
-                React.createElement('h2', { className: 'text-white font-bold text-[13px]' }, 'PAINEL ADMINISTRATIVO - NUVEM'),
-                React.createElement('button', { onClick: () => setAdminOpen(false), className: 'w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white' }, React.createElement(LucideIcons.X, { className: 'w-5 h-5' }))
-              ]),
-              !logado ? React.createElement('div', { className: 'flex-1 flex flex-col items-center justify-center p-6 gap-4' }, [
-                React.createElement('p', { className: 'text-[13px] font-medium' }, 'Digite a senha de administrador'),
-                React.createElement('div', { className: 'relative w-full max-w-[260px]' }, [
-                  React.createElement('input', {
-                    type: showPassword ? 'text' : 'password',
-                    value: senha,
-                    onChange: e => setSenha(e.target.value),
-                    placeholder: 'Senha',
-                    className: 'w-full h-10 rounded-full border border-[#E2E8F0] px-4 pr-10 text-sm'
-                  }),
-                  React.createElement('button', {
-                    onClick: () => setShowPassword(!showPassword),
-                    className: 'absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-[#F1F5F9] flex items-center justify-center text-gray-500'
-                  }, showPassword ? React.createElement(LucideIcons.EyeOff, { className: 'w-4 h-4' }) : React.createElement(LucideIcons.Eye, { className: 'w-4 h-4' }))
-                ]),
-                React.createElement('button', {
-                  onClick: () => { if (senha === "M1@2026") setLogado(true); else showToast("❌ Senha incorreta"); },
-                  className: 'h-9 px-6 rounded-full bg-[#0E2A5E] text-white text-[12px] font-bold'
-                }, 'Entrar')
-              ]) : React.createElement(React.Fragment, null, [
-                React.createElement('div', { className: 'flex gap-1 p-2 bg-[#F1F5F9] border-b border-[#E2E8F0] overflow-x-auto' },
-                  [
-                    { k: "ABAS", l: "EDITAR CONTEÚDO" },
-                    { k: "NUVEM", l: "SALVAR NA NUVEM" }
-                  ].map(tab => React.createElement('button', {
-                    key: tab.k,
-                    onClick: () => setAdminTab(tab.k),
-                    className: `shrink-0 h-8 px-3 rounded-full text-[11px] font-bold ${adminTab === tab.k ? 'bg-[#0E2A5E] text-white' : 'bg-white text-[#6B7280] border border-[#E2E8F0]'}`
-                  }, tab.l))
-                ),
-                React.createElement('div', { className: 'flex-1 overflow-y-auto p-3 space-y-4 bg-[#F7F7F8] scrollbar-thin' }, [
-                  adminTab === "ABAS" && React.createElement('div', { className: 'space-y-3' }, [
-                    React.createElement('div', { className: 'bg-white rounded-[12px] border border-[#E2E8F0] p-3' }, [
-                      React.createElement('label', { className: 'text-[11px] font-bold text-[#0A2448]' }, 'Selecionar Aba/Seção'),
-                      React.createElement('select', {
-                        value: adminAbaSel,
-                        onChange: e => setAdminAbaSel(e.target.value),
-                        className: 'mt-1 w-full h-9 rounded-[8px] border px-3 text-[12px] bg-white'
-                      }, Object.keys(abas).map(k => React.createElement('option', { key: k, value: k }, k)))
-                    ]),
-                    (abas[adminAbaSel] || []).map((item) => React.createElement('div', { key: item.id, className: 'bg-white rounded-[12px] border border-[#E2E8F0] p-3 space-y-2' }, [
-                      React.createElement('div', { className: 'flex justify-between items-center' }, [
-                        React.createElement('span', { className: 'text-[10px] font-bold text-[#0E2A5E]' }, item.titulo),
-                        React.createElement('button', {
-                          onClick: () => setAbas(prev => ({ ...prev, [adminAbaSel]: prev[adminAbaSel].filter(i => i.id !== item.id) })),
-                          className: 'h-6 px-2 rounded-full bg-red-50 text-red-600 text-[10px] flex items-center gap-1 font-bold'
-                        }, [React.createElement(LucideIcons.Trash2, { className: 'w-3 h-3' }), 'Excluir'])
-                      ]),
-                      React.createElement('input', {
-                        value: item.titulo,
-                        onChange: e => {
-                          const val = e.target.value;
-                          setAbas(prev => ({ ...prev, [adminAbaSel]: prev[adminAbaSel].map(i => i.id === item.id ? { ...i, titulo: val } : i) }));
-                        },
-                        className: 'w-full h-8 rounded-[8px] border px-2 text-[12px]',
-                        placeholder: 'Título'
-                      }),
-                      React.createElement('textarea', {
-                        value: item.descricao,
-                        onChange: e => {
-                          const val = e.target.value;
-                          setAbas(prev => ({ ...prev, [adminAbaSel]: prev[adminAbaSel].map(i => i.id === item.id ? { ...i, descricao: val } : i) }));
-                        },
-                        className: 'w-full min-h-[50px] rounded-[8px] border p-2 text-[11px]',
-                        placeholder: 'Descrição'
-                      })
-                    ])),
-                    React.createElement('button', {
-                      onClick: () => {
-                        const novoItem = { id: Date.now().toString(), titulo: "Novo Serviço / Laudo", descricao: "Descrição detalhada do serviço...", documentos: ["Documento 1"], whatsappMsg: "Olá! Quero orçamento.", formLink: "https://forms.gle/..." };
-                        setAbas(prev => ({ ...prev, [adminAbaSel]: [...(prev[adminAbaSel] || []), novoItem] }));
-                      },
-                      className: 'w-full h-9 rounded-full border border-dashed text-[12px] font-bold text-[#6B7280] bg-white'
-                    }, `+ Adicionar em ${adminAbaSel}`),
-                    React.createElement('button', {
-                      onClick: salvarENpublicar,
-                      className: 'w-full h-11 rounded-full bg-[#16A34A] text-white font-bold text-[13px] shadow-sm'
-                    }, '☁️ Salvar e Publicar na Nuvem (Todos online verão)')
-                  ]),
-                  adminTab === "NUVEM" && React.createElement('div', { className: 'space-y-3' }, [
-                    React.createElement('div', { className: 'bg-[#0E2A5E] rounded-[12px] p-4 text-white' }, [
-                      React.createElement('h3', { className: 'text-[13px] font-extrabold' }, 'Sincronização Online com Supabase'),
-                      React.createElement('p', { className: 'text-[11px] leading-[15px] mt-2' }, 'Ao clicar no botão abaixo, todas as modificações que você fez nas abas e serviços são salvas imediatamente no banco de dados e atualizadas para todos os usuários em qualquer dispositivo.')
-                    ]),
-                    React.createElement('button', {
-                      onClick: salvarENpublicar,
-                      className: 'w-full h-12 rounded-full bg-[#16A34A] text-white font-bold text-[13px] shadow-md flex items-center justify-center gap-2'
-                    }, [React.createElement(LucideIcons.Save, { className: 'w-4 h-4' }), 'Salvar e Publicar na Nuvem Agora'])
-                  ])
-                ])
-              ])
-            ])
-          ]),
-
-          // Toast de Notificação
-          toast && React.createElement('div', { className: 'fixed bottom-4 left-1/2 -translate-x-1/2 z-[70] bg-[#0A2448] text-white text-[12px] font-semibold px-4 py-2.5 rounded-full shadow-lg max-w-[90%] text-center' }, toast)
-        ])
-      ]);
+          if (data.data) {
+            document.getElementById('conteudo_site').innerHTML = `<pre>${JSON.stringify(data.data, null, 2)}</pre>`;
+          }
+        }
+      } catch (err) {
+        document.getElementById('status_nuvem').innerText = "Erro ao conectar com a nuvem.";
+        console.error("Erro:", err);
+      }
     }
 
-    createRoot(document.getElementById('root')).render(React.createElement(App));
+    carregarDadosDoSite();
   </script>
 </body>
 </html>
