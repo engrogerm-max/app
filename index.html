@@ -1,34 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-BR" translate="no">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>M1 Brasil - Painel Administrativo</title>
+  <title>M1 Brasil - Admin</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <style>
-    body { font-family: sans-serif; background: #f3f4f6; margin: 0; display: flex; justify-content: center; }
-    .app { width: 100%; max-width: 380px; background: #fff; min-height: 100vh; padding: 20px; text-align: center; }
-    .btn { background: #0E2A5E; color: white; width: 100%; padding: 20px; margin: 10px 0; border-radius: 10px; border: none; font-weight: bold; }
-    .admin-panel { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; padding: 20px; display: none; overflow-y: auto; }
-  </style>
 </head>
 <body>
-  <div class="app">
-    <h1 id="titulo_site">M1 Brasil Engenharia</h1>
-    <div id="botoes_area">
-      <button class="btn">LAUDOS</button>
-      <button class="btn">ART</button>
-    </div>
-    <button onclick="document.getElementById('admin').style.display='block'">⚙️ Configurar</button>
-  </div>
-
-  <div id="admin" class="admin-panel">
-    <h2>Painel Administrativo</h2>
-    <input type="password" id="senha" placeholder="Senha">
-    <input type="text" id="novo_titulo" placeholder="Novo Título do Site">
-    <button onclick="salvarDados()">Salvar e Publicar na Nuvem</button>
-    <button onclick="document.getElementById('admin').style.display='none'">Fechar</button>
-  </div>
+  <h1 id="titulo">Carregando...</h1>
+  <input type="text" id="inputTitulo" placeholder="Novo Título">
+  <button onclick="salvar()">Salvar</button>
 
   <script>
     const supabase = window.supabase.createClient(
@@ -36,28 +16,18 @@
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3dWRrcnBmYmd2b3lteWt5c2N2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY1NTMzMTYsImV4cCI6MjEwMjEyOTMxNn0.-mYSUSNe7nD7f6oJNHW-FT59Vy6P1ZErQ6xTqP_smjQ'
     );
 
-    // Carrega dados ao abrir
     async function carregar() {
-      const { data } = await supabase.from('m1br_site').select('*').eq('id', 1).single();
-      if (data && data.titulo) {
-        document.getElementById('titulo_site').innerText = data.titulo;
-      }
+      const { data } = await supabase.from('m1br_site').select('titulo').eq('id', 1).single();
+      if(data) document.getElementById('titulo').innerText = data.titulo;
     }
 
-    // Salva no banco de dados
-    async function salvarDados() {
-      const senha = document.getElementById('senha').value;
-      if (senha !== "M1@2026") { alert("Senha incorreta"); return; }
-      
-      const novoTitulo = document.getElementById('novo_titulo').value;
+    async function salvar() {
+      const novoTitulo = document.getElementById('inputTitulo').value;
       const { error } = await supabase.from('m1br_site').upsert({ id: 1, titulo: novoTitulo });
-      
-      if (error) alert("Erro ao salvar: " + error.message);
-      else {
-        alert("Publicado com sucesso!");
-        location.reload(); // Recarrega para todos verem a mudança
-      }
+      if(error) alert("Erro: " + error.message);
+      else { alert("Salvo!"); carregar(); }
     }
+
     carregar();
   </script>
 </body>
