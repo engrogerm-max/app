@@ -2,13 +2,34 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>M1 Brasil - Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>M1 Brasil Engenharia</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    body { font-family: sans-serif; background: #f3f4f6; margin: 0; display: flex; justify-content: center; }
+    .app { width: 100%; max-width: 380px; background: #fff; min-height: 100vh; padding: 20px; text-align: center; }
+    .btn { background: #0E2A5E; color: white; width: 100%; padding: 20px; margin: 10px 0; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; }
+    #admin { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; padding: 20px; display: none; z-index: 100; }
+  </style>
 </head>
 <body>
-  <h1 id="titulo">Carregando...</h1>
-  <input type="text" id="inputTitulo" placeholder="Novo Título">
-  <button onclick="salvar()">Salvar</button>
+  <div class="app">
+    <h1 id="titulo_site">Carregando...</h1>
+    <div id="botoes_area">
+      <button class="btn">LAUDOS</button>
+      <button class="btn">ART</button>
+      <button class="btn">PROJETOS</button>
+    </div>
+    <button onclick="document.getElementById('admin').style.display='block'" style="margin-top:20px; background:none; border:none; cursor:pointer;">⚙️</button>
+  </div>
+
+  <div id="admin">
+    <h2>Configurar Site</h2>
+    <input type="password" id="senha" placeholder="Senha"><br><br>
+    <input type="text" id="novo_titulo" placeholder="Novo Título"><br><br>
+    <button onclick="salvarNaNuvem()">Salvar e Publicar</button>
+    <button onclick="document.getElementById('admin').style.display='none'">Fechar</button>
+  </div>
 
   <script>
     const supabase = window.supabase.createClient(
@@ -18,16 +39,25 @@
 
     async function carregar() {
       const { data } = await supabase.from('m1br_site').select('titulo').eq('id', 1).single();
-      if(data) document.getElementById('titulo').innerText = data.titulo;
+      if (data) document.getElementById('titulo_site').innerText = data.titulo;
+      else document.getElementById('titulo_site').innerText = "M1 Brasil Engenharia";
     }
 
-    async function salvar() {
-      const novoTitulo = document.getElementById('inputTitulo').value;
+    async function salvarNaNuvem() {
+      const senha = document.getElementById('senha').value;
+      if (senha !== "M1@2026") { alert("Senha incorreta!"); return; }
+      
+      const novoTitulo = document.getElementById('novo_titulo').value;
       const { error } = await supabase.from('m1br_site').upsert({ id: 1, titulo: novoTitulo });
-      if(error) alert("Erro: " + error.message);
-      else { alert("Salvo!"); carregar(); }
+      
+      if (error) {
+        alert("Erro na nuvem: " + error.message);
+      } else {
+        alert("✅ Salvo na nuvem com sucesso!");
+        carregar();
+        document.getElementById('admin').style.display = 'none';
+      }
     }
-
     carregar();
   </script>
 </body>
