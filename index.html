@@ -2,33 +2,31 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>M1 Brasil Engenharia</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
-    body { font-family: sans-serif; background: #f3f4f6; margin: 0; display: flex; justify-content: center; }
-    .app { width: 100%; max-width: 380px; background: #fff; min-height: 100vh; padding: 20px; text-align: center; }
-    .btn { background: #0E2A5E; color: white; width: 100%; padding: 20px; margin: 10px 0; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; }
-    #admin { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; padding: 20px; display: none; z-index: 100; }
+    body { font-family: Arial, sans-serif; background: #f4f6f9; margin: 0; padding: 40px; display: flex; justify-content: center; }
+    .card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 100%; max-width: 500px; position: relative; }
+    h1 { color: #333; font-size: 24px; margin-bottom: 20px; }
+    .admin-panel { margin-top: 30px; border-top: 2px solid #eee; padding-top: 20px; display: none; }
+    input, button { width: 100%; padding: 10px; margin-top: 10px; box-sizing: border-box; font-size: 16px; }
+    button { background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+    button:hover { background: #218838; }
+    .gear { position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 20px; cursor: pointer; width: auto; padding: 5px; }
   </style>
 </head>
 <body>
-  <div class="app">
-    <h1 id="titulo_site">Carregando...</h1>
-    <div id="botoes_area">
-      <button class="btn">LAUDOS</button>
-      <button class="btn">ART</button>
-      <button class="btn">PROJETOS</button>
-    </div>
-    <button onclick="document.getElementById('admin').style.display='block'" style="margin-top:20px; background:none; border:none; cursor:pointer;">⚙️</button>
-  </div>
 
-  <div id="admin">
-    <h2>Configurar Site</h2>
-    <input type="password" id="senha" placeholder="Senha"><br><br>
-    <input type="text" id="novo_titulo" placeholder="Novo Título"><br><br>
-    <button onclick="salvarNaNuvem()">Salvar e Publicar</button>
-    <button onclick="document.getElementById('admin').style.display='none'">Fechar</button>
+  <div class="card">
+    <button class="gear" onclick="tentarAdmin()">⚙️</button>
+    <h1 id="titulo_site">Carregando...</h1>
+    
+    <div id="painel" class="admin-panel">
+      <h3>Painel Administrativo</h3>
+      <input type="text" id="novo_titulo" placeholder="Digite o novo título do site">
+      <button onclick="salvar()">Salvar e Publicar</button>
+    </div>
   </div>
 
   <script>
@@ -38,26 +36,39 @@
     );
 
     async function carregar() {
-      const { data } = await supabase.from('m1br_site').select('titulo').eq('id', 1).single();
-      if (data) document.getElementById('titulo_site').innerText = data.titulo;
-      else document.getElementById('titulo_site').innerText = "M1 Brasil Engenharia";
-    }
-
-    async function salvarNaNuvem() {
-      const senha = document.getElementById('senha').value;
-      if (senha !== "M1@2026") { alert("Senha incorreta!"); return; }
-      
-      const novoTitulo = document.getElementById('novo_titulo').value;
-      const { error } = await supabase.from('m1br_site').upsert({ id: 1, titulo: novoTitulo });
-      
-      if (error) {
-        alert("Erro na nuvem: " + error.message);
-      } else {
-        alert("✅ Salvo na nuvem com sucesso!");
-        carregar();
-        document.getElementById('admin').style.display = 'none';
+      const { data, error } = await supabase.from('m1br_site').select('titulo').eq('id', 1).single();
+      if (data) {
+        document.getElementById('titulo_site').innerText = data.titulo;
+        document.title = data.titulo;
       }
     }
+
+    function tentarAdmin() {
+      const senha = prompt("Digite a senha de administrador:");
+      if (senha === "M1@2026") {
+        document.getElementById('painel').style.display = "block";
+        alert("Acesso liberado!");
+      } else if (senha !== null) {
+        alert("Senha incorreta!");
+      }
+    }
+
+    async function salvar() {
+      const novo = document.getElementById('novo_titulo').value;
+      if (!novo) {
+        alert("Digite um título antes de salvar!");
+        return;
+      }
+      const { error } = await supabase.from('m1br_site').upsert({ id: 1, titulo: novo });
+      if (error) {
+        alert("Erro ao salvar: " + error.message);
+      } else {
+        alert("✅ Salvo na nuvem com sucesso!");
+        document.getElementById('novo_titulo').value = "";
+        carregar();
+      }
+    }
+
     carregar();
   </script>
 </body>
